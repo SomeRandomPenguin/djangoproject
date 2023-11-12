@@ -7,4 +7,7 @@ from django.shortcuts import render
 
 def note_list(request):
     return render(request, 'note/note_list.html')
+def note_detail(request, note_id): 
+    return render(request, 'note/note_detail.html')
+
 # Create your views here.
