@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Post - Post Title 1</title>
+
+    {% load static %}
     <!-- Add your custom CSS stylesheet here -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="{% static 'images.png' %}">
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Add Bootstrap CSS -->
+    
 </head>
 <body>
     <header>
@@ -37,22 +42,21 @@
         <div class="row">
             <div class="col-lg-8">
                 <!-- Blog Post -->
+                {% if note.image %}
                 <div class="card mb-4 rounded">
-                    <img class="card-img-top" src="logo.png" alt="Blog Post Image 1">
+                    <img class="card-img-top" src="{{ note.image.url }}" alt="Blog Post Image 1">
                     <div class="card-body">
-                        <h2 class="card-title">Post Title 1</h2>
-                        <p class="card-text">Published on: September 1, 2023</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante eget urna dignissim auctor vel ac dui.</p>
+                        <p class="card-text">{{note.date_posted}}</p>
+                        <p class="card-text"></p>
                     </div>
                 </div>
+                {% endif %}
 
                 <!-- Blog Post Content -->
                 <div class="card mb-4 rounded">
                     <div class="card-body">
-                        <h3 class="card-title">Post Content</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget ante eget urna dignissim auctor vel ac dui. Vestibulum ut ipsum vel libero volutpat aliquam a in erat. Nunc tincidunt elit vel nisl laoreet auctor.</p>
-                        <p>Vivamus vulputate nisl nec massa posuere, ac fermentum purus varius. Praesent auctor libero at lorem ultrices, eu scelerisque tortor lacinia. Sed vehicula odio eget est cursus, eu tincidunt augue auctor. Fusce eu justo nec nisi congue malesuada.</p>
-                        <p>Quisque mattis a lectus nec bibendum. Aliquam fringilla, arcu nec tincidunt tincidunt, libero dui lacinia leo, ac feugiat risus turpis a ligula. Donec vel tortor consectetur, venenatis elit id, bibendum neque.</p>
+                        <h3 class="card-title">{{note.title}}</h3>
+                        <p>{{ note.content }}</p>
                     </div>
                 </div>
             </div>
