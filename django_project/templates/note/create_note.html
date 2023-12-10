@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Note</title>
+    {% load static %}
     <!-- Add your custom CSS stylesheet here if needed -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
@@ -25,14 +26,19 @@
                 <div class="card rounded">
                     <div class="card-body">
                         <h2 class="card-title">Create Note</h2>
-                        <form>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label for="noteTitle">Title:</label>
-                                <input type="text" class="form-control" id="noteTitle" placeholder="Enter note title" required>
+                                <label for="{{ form.title.id_for_label }}">Title:</label>
+                                <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.name }}" placeholder="Enter note title" required>
                             </div>
                             <div class="form-group">
-                                <label for="noteContent">Content:</label>
-                                <textarea class="form-control" id="noteContent" rows="5" placeholder="Enter note content" required></textarea>
+                                <label for="{{ form.content.id_for_label }}">Content:</label>
+                                <textarea class="form-control" id="{{ form.content.id_for_label }}" name="{{ form.content.name }}" rows="5" placeholder="Enter note content" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.image.id_for_label }}">Image:</label>
+                                <input type="file" class="form-control-file" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Save Note</button>
                         </form>

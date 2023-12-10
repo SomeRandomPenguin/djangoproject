@@ -36,35 +36,34 @@
         </nav>
     </header>
 
-    {% for note in note %}
-
         <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-8">
-                    <!-- Blog Post -->
-                    <div class="card mb-4 rounded">
-                        {% if note.image %}
-                        <img class="card-img-top" src="{{ note.image.url}}" alt="Blog Post Image 1">
-                        {% endif %}
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                
-                                <a href="{% url 'note:note_detail' note_id=note.id %}">{{ note.title }}</a>
-                            </h2>
-                            <p class="card-text">{{note.published_date}}</p>
-                            <p class="card-text">{{ note.content|truncatechars:50}}</p>
+                {% for note in note %}
+                    <div class="col-lg-8">
+                        <!-- Blog Post -->
+                        <div class="card mb-4 rounded">
+                            {% if note.image %}
+                            <img class="card-img-top" src="{{ note.image.url}}" alt="Blog Post Image 1">
+                            {% endif %}
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    
+                                    <a href="{% url 'note:note_detail' note_id=note.id %}">{{ note.title }}</a>
+                                </h2>
+                                <p class="card-text">{{note.published_date}}</p>
+                                <p class="card-text">{{ note.content|truncatechars:50}}</p>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post Content -->
+                        <div class="card mb-4 rounded">
+                            <div class="card-body">
+                                <h3 class="card-title">Post Content</h3>
+                                {{note.content}}
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Blog Post Content -->
-                    <div class="card mb-4 rounded">
-                        <div class="card-body">
-                            <h3 class="card-title">Post Content</h3>
-                            {{note.content}}
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
                 <div class="col-lg-4">
                     <!-- Sidebar -->
                     <div class="card rounded">
@@ -80,7 +79,6 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
     <footer>
         <!-- Include your website's footer here -->
         <div class="text-center p-4">

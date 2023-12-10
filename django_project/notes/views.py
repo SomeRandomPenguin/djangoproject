@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from notes.models import Note
+from .forms import NoteForm
 # from .models import Note
 # from .forms import NoteForm
 # from django.contrib.auth.decorators import login_required
@@ -14,6 +15,15 @@ def note_detail(request, note_id):
     noteid = get_object_or_404(Note, pk=note_id)
     return render(request, 'note/note_detail.html',{'note':noteid})
 def create_note(request): 
-    return render(request, 'note/create_note.html')
+    if request.method =="POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.author = request.user
+            note.save()
+            return redirect('note:note_list')
+    else:
+        form = NoteForm()
+    return render(request, 'note/create_note.html', {'form':form})
 
 # Create your views here.
