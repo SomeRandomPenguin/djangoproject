@@ -11,15 +11,17 @@ from .forms import NoteForm
 def note_list(request):
     notelist = Note.objects.all()
     return render(request, 'note/note_list.html',  {'note':notelist})
+
 def note_detail(request, note_id): 
     noteid = get_object_or_404(Note, pk=note_id)
     return render(request, 'note/note_detail.html',{'note':noteid})
+
 def create_note(request): 
     if request.method =="POST":
         form = NoteForm(request.POST)
         if form.is_valid():
             note = form.save(commit=False)
-            note.author = request.user
+            # note.author = request.user
             note.save()
             return redirect('note:note_list')
     else:
