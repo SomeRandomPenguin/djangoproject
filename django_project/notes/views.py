@@ -9,7 +9,7 @@ from .forms import NoteForm
 
 
 def note_list(request):
-    notelist = Note.objects.all()
+    notelist = Note.objects.all().order_by('-date_posted')
     return render(request, 'note/note_list.html',  {'note':notelist})
 
 def note_detail(request, note_id): 
@@ -18,7 +18,7 @@ def note_detail(request, note_id):
 
 def create_note(request): 
     if request.method =="POST":
-        form = NoteForm(request.POST)
+        form = NoteForm(request.POST, request.FILES)
         if form.is_valid():
             note = form.save(commit=False)
             # note.author = request.user
