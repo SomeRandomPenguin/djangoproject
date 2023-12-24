@@ -28,4 +28,7 @@ def create_note(request):
         form = NoteForm()
     return render(request, 'note/create_note.html', {'form':form})
 
+def about(request):
+    return render(request, 'note/about.html')
+
 # Create your views here.
